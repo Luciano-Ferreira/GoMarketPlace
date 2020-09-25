@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 
 import AsyncStorage from '@react-native-community/async-storage';
+import { ProductQuantity } from 'src/pages/Cart/styles';
 
 interface Product {
   id: string;
@@ -86,6 +87,7 @@ const CartProvider: React.FC = ({ children }) => {
           ? { ...product, quantity: product.quantity - 1 }
           : product,
       );
+      console.log(newProducts.map(product => product.quantity));
 
       setProducts(newProducts);
 
@@ -96,6 +98,33 @@ const CartProvider: React.FC = ({ children }) => {
     },
     [products],
   );
+
+  /*
+  const decrement = useCallback(
+    async id => {
+      const updatedProductCart = products.find(product => product.id === id);
+      const restProducts = products.filter(product => product.id !== id);
+
+      if (updatedProductCart && updatedProductCart.quantity >= 1) {
+        setProducts([
+          ...restProducts,
+          {
+            ...updatedProductCart,
+            quantity: updatedProductCart.quantity - 1,
+          },
+        ]);
+      } else {
+        setProducts(restProducts);
+      }
+
+      await AsyncStorage.setItem(
+        '@GoMarketplace:products',
+        JSON.stringify(products),
+      );
+    },
+    [products],
+  );
+  */
 
   const value = React.useMemo(
     () => ({ addToCart, increment, decrement, products }),
