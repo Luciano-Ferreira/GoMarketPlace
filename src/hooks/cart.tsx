@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 
 import AsyncStorage from '@react-native-community/async-storage';
-import { ProductQuantity } from 'src/pages/Cart/styles';
 
 interface Product {
   id: string;
@@ -87,7 +86,6 @@ const CartProvider: React.FC = ({ children }) => {
           ? { ...product, quantity: product.quantity - 1 }
           : product,
       );
-      console.log(newProducts.map(product => product.quantity));
 
       setProducts(newProducts);
 
